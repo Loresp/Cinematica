@@ -11,20 +11,16 @@ Este repositorio contiene el código fuente para la implementación y simulació
 El proyecto implementa las siguientes funcionalidades:
 
 - **Cinemática Directa:**  
-  La función `forward_kinematics` calcula la posición de cada articulación y del efector final a partir de los ángulos \( \theta_1 \), \( \theta_2 \) y \( \theta_3 \) usando las ecuaciones:
-  \[
-  \begin{aligned}
-  x_1 &= l_1\cos(\theta_1),\quad y_1 = l_1\sin(\theta_1) \\
-  x_2 &= x_1 + l_2\cos(\theta_1+\theta_2),\quad y_2 = y_1 + l_2\sin(\theta_1+\theta_2) \\
-  x_3 &= x_2 + l_3\cos(\theta_1+\theta_2+\theta_3),\quad y_3 = y_2 + l_3\sin(\theta_1+\theta_2+\theta_3)
-  \end{aligned}
-  \]
+  La función `forward_kinematics` calcula la posición de cada articulación y del efector final a partir de los ángulos θ1, θ2 y θ3 usando las ecuaciones:
+x1=l1cos(θ1),				y1=l1sin(θ1)
+x2=x1+l2cos(θ1+θ2),			y2=y1+l2sin(θ1+θ2)
+x3=x2+l3cos(θ1+θ2+θ3), 		x3=y2+l3sin(θ1+θ2+θ3)
   
 - **Detección de Colisiones:**  
   Se evalúa la intersección de cada uno de los 3 eslabones del robot contra obstáculos definidos como círculos en el espacio de trabajo. La función `is_collision` recorre cada segmento del robot para detectar colisiones.
 
 - **C-Space:**  
-  Se computa un espacio tridimensional (cubos en \( \theta_1 \), \( \theta_2 \) y \( \theta_3 \)) donde se marca con valores especiales las configuraciones que generan colisión.
+  Se computa un espacio tridimensional (cubos en θ1, θ2 y θ3) donde se marca con valores especiales las configuraciones que generan colisión.
 
 - **Planificación de Trayectorias:**  
   Se implementa la función `interpolate_path` para generar una secuencia de configuraciones intermedias mediante interpolación lineal en el espacio articular. Además, la función `compute_via_point` calcula un punto vía en el espacio de trabajo que, a partir de los ajustes acumulados para evitar obstáculos, permite replanificar la trayectoria.
@@ -38,14 +34,9 @@ El proyecto implementa las siguientes funcionalidades:
 
 ```
 ├── README.md
-├── single_obstacle.py         # Código para el escenario con un único obstáculo.
-├── multiple_obstacles.py      # Código para el escenario con múltiples obstáculos.
-└── report.pdf                 # Reporte final con la descripción, resultados y conclusiones.
+├── simulacion_un_obstaculo.py         # Código para el escenario con un único obstáculo.
+└── simulacion_varios_obstaculos.py      # Código para el escenario con múltiples obstáculos.
 ```
-
-> **Nota:** En algunos casos, ambos escenarios se encuentran integrados en un solo archivo. Revisa los comentarios en el código para seleccionar el escenario deseado.
-
----
 
 ## Requisitos
 
@@ -67,18 +58,20 @@ pip install numpy matplotlib scipy
 Para ejecutar el escenario con un único obstáculo:
 
 ```bash
-python single_obstacle.py
+python simulacion_un_obstaculo.py
 ```
 
 Para ejecutar el escenario con múltiples obstáculos:
 
 ```bash
-python multiple_obstacles.py
+python simulacion_varios_obstaculos.py
 ```
 
 Cada script generará:
 - La visualización del C-Space, mostrando las regiones en las que se producen colisiones.
 - Una animación del movimiento del robot desde la configuración inicial hasta la final, indicando en rojo aquellas configuraciones que presentan colisión y en azul las configuraciones seguras.
+- Una gráfica de la configuración inicial del brazo.
+- Una gráfica de la configuracion final del brazo.
 
 ---
 
